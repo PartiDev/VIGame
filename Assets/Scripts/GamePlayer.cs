@@ -5,19 +5,17 @@ public class GamePlayer : MonoBehaviour
     public int playerNo;
     [SerializeField] private PlayerTypes thisPlayerType;
 
-    public KeyCode moveKey_Left;
-    public KeyCode moveKey_Right;
-    public KeyCode attackKey;
-    public KeyCode parryKey;
+    public KeyCode Guitar_Mode;
+    public KeyCode Piano_Mode;
+    public KeyCode Flute_Mode;
+    public KeyCode Attack;
+    public KeyCode Parry;
 
-    public int currentPosLevel = 1;
-    public bool tickInputActive = true;
+    public bool metronomeTickActive = true;
+    public bool movementOnCooldown = false;
 
     [SerializeField] private int totalHealth = 100;
     private int currentHealth;
-    [SerializeField] private int smallAttackDamage;
-    [SerializeField] private int mediumAttackDamage;
-    [SerializeField] private int bigAttackDamage;
     [SerializeField] private AudioClip hurtSound;
     public AudioClip parrySound;
 
@@ -28,29 +26,11 @@ public class GamePlayer : MonoBehaviour
         currentHealth = totalHealth;
     }
 
-    public void QueuePlayerAttack(PlayerAttack attack)
-    {
-        incomingAttack = attack;
-    }
-
     public void DamagePlayer()
     {
         if (incomingAttack == null) return;
 
-        var attackSize = incomingAttack.playerAttackSize;
         var volume = 0.3f;
-        if (attackSize == PlayerAttackSizes.Small)
-        {
-            currentHealth -= smallAttackDamage;
-            volume -= 0.1f;
-        } else if (attackSize == PlayerAttackSizes.Medium)
-        {
-            currentHealth -= mediumAttackDamage;
-        } else if (attackSize == PlayerAttackSizes.Big)
-        {
-            currentHealth -= bigAttackDamage;
-            volume += 0.1f;
-        }
 
         bool leftRight = playerNo == 1 ? true : false;
         AudioManager.Instance.PlaySFXDirectional(hurtSound, leftRight, volume);

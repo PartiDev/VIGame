@@ -37,11 +37,11 @@ public class Metronome : MonoBehaviour
         if (turn)
         {
             pitch = 1.5f;
-            turn = false;
         }
-        else turn = true;
 
-        AudioManager.Instance.PlaySFXDirectional(metronomeTick, turn, 0.2f, pitch);
+        turn = !turn;
+
+        AudioManager.Instance.PlaySFX(metronomeTick, 0.2f, pitch);
         OnMetronomeTick();
     }
 
