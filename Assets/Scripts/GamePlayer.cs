@@ -3,7 +3,6 @@ using UnityEngine;
 public class GamePlayer : MonoBehaviour
 {
     public int playerNo;
-    [SerializeField] private PlayerTypes thisPlayerType;
 
     public KeyCode Guitar_Mode;
     public KeyCode Piano_Mode;
@@ -11,7 +10,7 @@ public class GamePlayer : MonoBehaviour
     public KeyCode Attack;
     public KeyCode Parry;
 
-    public bool metronomeTickActive = true;
+    public bool metronomeTickActive = false;
     public bool movementOnCooldown = false;
 
     [SerializeField] private int totalHealth = 100;
@@ -39,5 +38,3 @@ public class GamePlayer : MonoBehaviour
         Debug.Log(currentHealth);
     }
 }
-
-public enum PlayerTypes { Piano, Guitar }

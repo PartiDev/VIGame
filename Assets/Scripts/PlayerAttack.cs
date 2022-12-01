@@ -7,10 +7,6 @@ public class PlayerAttack : MonoBehaviour
     [HideInInspector] public bool currentPlayerSide;
     public PlayerAttackMode thisAttackMode;
 
-    [SerializeField] private AudioClip piano_AttackSound_Major;
-    [SerializeField] private AudioClip guitar_AttackSound_Major;
-    [SerializeField] private AudioClip flute_AttackSound_Major;
-
     private PlayerAttackManager playerAttackManager;
 
     public void OnAwake(PlayerAttackManager _attackManager, int _playerNo, bool _currentSide)

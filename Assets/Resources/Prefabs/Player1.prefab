@@ -129,7 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf3c3aa04569cf4ebdf2175d8ae65e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNo: 0
+  playerNo: 1
   thisPlayerType: 1
   Guitar_Mode: 119
   Piano_Mode: 97

@@ -1,11 +1,12 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-public class PlayerAttackMode : MonoBehaviour
+[System.Serializable]
+public class PlayerAttackMode
 {
-    [HideInInspector] public AttackType attackType;
-    [HideInInspector] public AttackType counteringAttackType;
-    [HideInInspector] public float leadUpTime;
+    [SerializeField] public AttackType attackType;
+    [SerializeField] public AttackType counteringAttackType;
+    [SerializeField] public float leadUpTime;
     [SerializeField] private int damageAmount;
     public AudioClip attackSound_Major;
     public AudioClip hurtSound;

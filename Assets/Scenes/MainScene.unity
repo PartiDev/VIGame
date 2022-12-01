@@ -989,11 +989,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9e83c0c1691dd6468c6b3c456bc8aff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bpm: 60
+  bpm: 90
   metronomeTick: {fileID: 8300000, guid: e5d691381254fe543a842533d24e32da, type: 3}
   nextTick: 0
   ticked: 0
-  turn: 0
 --- !u!4 &857967141
 Transform:
   m_ObjectHideFlags: 0
