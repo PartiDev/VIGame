@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731704, g: 0.13414727, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -409,6 +409,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player1
       objectReference: {fileID: 0}
+    - target: {fileID: 1916861347078475523, guid: c5ad7489f077cde4d96cd71279d9c912, type: 3}
+      propertyPath: playerAnim
+      value: 
+      objectReference: {fileID: 1875265275}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c5ad7489f077cde4d96cd71279d9c912, type: 3}
 --- !u!4 &316995673 stripped
@@ -970,6 +974,7 @@ GameObject:
   - component: {fileID: 857967141}
   - component: {fileID: 857967140}
   - component: {fileID: 857967142}
+  - component: {fileID: 857967143}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -1022,9 +1027,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Player1: {fileID: 1875265274}
   Player2: {fileID: 1823622114}
-  attackManager: {fileID: 0}
+  attackManager: {fileID: 857967143}
   metronome: {fileID: 857967140}
-  tickMoveWindow: 0.2
+  tickMoveWindow: 0.05
+  attackModePrefabs:
+  - {fileID: 7332382901741526244, guid: 5dbdc05f58b49df41b8189e241c3d20d, type: 3}
+  - {fileID: 7332382901741526244, guid: 9a071c347f04b1547bc813de4579fa72, type: 3}
+  - {fileID: 7332382901741526244, guid: 3bdec3cc11b3ac14681a5b44bc9d66a5, type: 3}
+--- !u!114 &857967143
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857967139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9b0940e88c785942b2e1c1c381050c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &865456303
 GameObject:
   m_ObjectHideFlags: 0
@@ -1152,16 +1173,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Guitar mode - ^ key
+  m_text: 'Guitar fused - ^ key
 
-    Piano mode - < key
+    Piano fused - < key
 
-    Flute mode - > key
+    Flute fused - > key
 
-    Attack
-    - Insert
+    Parry
+    - + Ctrl
 
-    Parry - Ctrl'
+    Attack - + Insert'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc008444253ad6a479a856d0440fa436, type: 2}
   m_sharedMaterial: {fileID: -1410174556413369889, guid: bc008444253ad6a479a856d0440fa436, type: 2}
@@ -1813,16 +1834,16 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Guitar mode - W
+  m_text: 'Guitar fused - W
 
-    Piano mode - A
+    Piano fused - A
 
-    Flute mode - D
+    Flute fused - D
 
-    Attack -
-    Spacebar
+    Attack
+    - + Spacebar
 
-    Parry - LShift'
+    Parry - + LShift'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: bc008444253ad6a479a856d0440fa436, type: 2}
   m_sharedMaterial: {fileID: -1410174556413369889, guid: bc008444253ad6a479a856d0440fa436, type: 2}
@@ -1911,6 +1932,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3701563001917649100, guid: 914cfff3820cbb64081cac8a431cd9e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3701563001917649100, guid: 914cfff3820cbb64081cac8a431cd9e9, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
@@ -1954,6 +1979,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player2
       objectReference: {fileID: 0}
+    - target: {fileID: 3701563002509696005, guid: 914cfff3820cbb64081cac8a431cd9e9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 914cfff3820cbb64081cac8a431cd9e9, type: 3}
 --- !u!4 &1823622113 stripped
@@ -1983,6 +2012,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bdf3c3aa04569cf4ebdf2175d8ae65e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &1875265275 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 2801381722904314919, guid: c5ad7489f077cde4d96cd71279d9c912, type: 3}
+  m_PrefabInstance: {fileID: 316995672}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2081171528
 GameObject:
   m_ObjectHideFlags: 0

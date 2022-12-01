@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3701563001917649100}
   - component: {fileID: 3701563001917649101}
+  - component: {fileID: 217027844945805629}
   m_Layer: 0
   m_Name: Player2
   m_TagString: Untagged
@@ -46,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNo: 2
-  thisPlayerType: 0
+  playerAnim: {fileID: 217027844945805629}
   Guitar_Mode: 273
   Piano_Mode: 276
   Flute_Mode: 275
@@ -54,9 +55,29 @@ MonoBehaviour:
   Parry: 305
   metronomeTickActive: 1
   movementOnCooldown: 0
-  totalHealth: 100
+  totalHealth: 200
+  activeAttack: {fileID: 0}
   incomingAttack: {fileID: 0}
-  currentAttackMode: {fileID: 0}
+--- !u!95 &217027844945805629
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3701563001917649139}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c1563fcbcaa1030458e6a74bbcc41035, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &3701563002509696004
 GameObject:
   m_ObjectHideFlags: 0

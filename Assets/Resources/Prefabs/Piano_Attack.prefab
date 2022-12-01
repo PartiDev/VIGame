@@ -44,12 +44,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b2e52efef98986c4e9fb75f892661ecb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerNo: 0
+  attackingPlayer: {fileID: 0}
+  attackedPlayer: {fileID: 0}
   currentPlayerSide: 0
   thisAttackMode:
     attackType: 0
     counteringAttackType: 1
     leadUpTime: 0.75
     damageAmount: 20
+    damageBoostAmount: 10
     attackSound_Major: {fileID: 8300000, guid: aad9bae35bb32d84992ec2ed07e36925, type: 3}
     hurtSound: {fileID: 8300000, guid: a4f4ee434c4b1af4dac77ee7bb8c51a9, type: 3}

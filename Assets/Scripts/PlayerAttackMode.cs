@@ -7,7 +7,8 @@ public class PlayerAttackMode
     [SerializeField] public AttackType attackType;
     [SerializeField] public AttackType counteringAttackType;
     [SerializeField] public float leadUpTime;
-    [SerializeField] private int damageAmount;
+    public int damageAmount;
+    public int damageBoostAmount;
     public AudioClip attackSound_Major;
     public AudioClip hurtSound;
 }

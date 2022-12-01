@@ -3,21 +3,28 @@ using UnityEngine;
 
 public class PlayerAttack : MonoBehaviour
 {
-    [HideInInspector] public int playerNo;
+    [HideInInspector] public GamePlayer attackingPlayer;
+    [HideInInspector] public GamePlayer attackedPlayer;
     [HideInInspector] public bool currentPlayerSide;
     public PlayerAttackMode thisAttackMode;
+    
+    public int attackAmount {get; private set;}
 
     private PlayerAttackManager playerAttackManager;
 
-    public void OnAwake(PlayerAttackManager _attackManager, int _playerNo, bool _currentSide)
+    private bool phase = false;
+
+    public void OnAwake(PlayerAttackManager _attackManager, GamePlayer _attackingPlayer, GamePlayer _opposingPlayer, bool isOnBeat = false)
     {
         playerAttackManager = _attackManager;
-        playerNo = _playerNo;
-        currentPlayerSide = _currentSide;
+        attackingPlayer = _attackingPlayer;
+        attackedPlayer = _opposingPlayer;
+        
+        attackAmount = isOnBeat ? thisAttackMode.damageAmount + thisAttackMode.damageBoostAmount : thisAttackMode.damageAmount;
 
         bool leftRight = false;
-        AudioClip thisAudio = null;
-        if (currentPlayerSide == true)
+        AudioClip thisAudio = thisAttackMode.attackSound_Major;
+        if (attackingPlayer.playerNo == 1)
         {
             leftRight = true;
         }
@@ -27,7 +34,6 @@ public class PlayerAttack : MonoBehaviour
 
     public void ParryAttack(int _playerNo)
     {
-        playerNo = _playerNo;
-        currentPlayerSide = !currentPlayerSide;
+
     }
 }

@@ -11,7 +11,9 @@ namespace Assets.Scripts
 
         [SerializeField] private PlayerAttackManager attackManager;
         [SerializeField] private Metronome metronome;
-        [SerializeField] private float tickMoveWindow = 0.1f;
+        [SerializeField] private float tickMoveWindow = 0.05f;
+
+        [SerializeField] private PlayerAttack[] attackModePrefabs;
 
         private void Awake()
         {
@@ -34,43 +36,69 @@ namespace Assets.Scripts
 
         public void FixedUpdate()
         {
-            if (Player1 == null && Player2 == null)
-            {
-                return;
-            }
-
             //Player 1 input types
             if (!Player1.movementOnCooldown)
-            {/*
-                if (Input.GetKey(Player1.moveKey_Right))
+            {
+                if (Input.GetKey(Player1.Attack))
                 {
+                    PlayerAttack currentPlayerAttack = null;
+                    if (Input.GetKey(Player1.Piano_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[0];
+                    }
 
-                    Player1.tickInputActive = false;
+                    if (Input.GetKey(Player1.Guitar_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[1];
+                    }
+
+                    if (Input.GetKey(Player1.Flute_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[2];
+                    }
+
+                    if (currentPlayerAttack != null){
+                        attackManager.PlayerAttack(Player1, Player2, currentPlayerAttack);
+                        Player1.metronomeTickActive = false;
+                    }
                 }
 
-                if (Input.GetKey(Player1.attackKey))
-                {
-                    attackManager.SpawnPlayerAttack(Player1);
-
-                    Player1.tickInputActive = false;
-                }
-
-                if (Input.GetKey(Player1.parryKey))
+                if (Input.GetKey(Player1.Parry))
                 {
                     if (Player1.incomingAttack)
                     {
                         attackManager.ParryAttack(Player1, Player1.incomingAttack);
                     }
-                    Player1.tickInputActive = false;
                 }
-                */
             }
 
             //Player 2 input types
 
             if (!Player2.movementOnCooldown)
             {
+                if (Input.GetKey(Player2.Attack))
+                {
+                    PlayerAttack currentPlayerAttack = null;
+                    if (Input.GetKey(Player2.Piano_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[0];
+                    }
 
+                    if (Input.GetKey(Player2.Guitar_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[1];
+                    }
+
+                    if (Input.GetKey(Player2.Flute_Mode))
+                    {
+                        currentPlayerAttack = attackModePrefabs[2];
+                    }
+
+                    if (currentPlayerAttack != null){
+                        attackManager.PlayerAttack(Player2, Player1, currentPlayerAttack);
+                        Player2.metronomeTickActive = false;
+                    }
+                }
             }
         }
     }
