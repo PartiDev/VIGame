@@ -47,17 +47,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerNo: 0
   thisPlayerType: 0
-  Guitar_Mode: 0
-  Piano_Mode: 0
-  Flute_Mode: 0
-  Attack: 0
-  Parry: 0
+  Guitar_Mode: 273
+  Piano_Mode: 276
+  Flute_Mode: 275
+  Attack: 277
+  Parry: 305
   metronomeTickActive: 1
   movementOnCooldown: 0
   totalHealth: 100
-  hurtSound: {fileID: 0}
-  parrySound: {fileID: 0}
   incomingAttack: {fileID: 0}
+  currentAttackMode: {fileID: 0}
 --- !u!1 &3701563002509696004
 GameObject:
   m_ObjectHideFlags: 0
@@ -131,7 +130,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: 6e41e01b8d2c4a0468374993fb208eaa, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 18fb335d14a335a42964c1acd24862eb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

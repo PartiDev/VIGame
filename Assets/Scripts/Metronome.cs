@@ -9,8 +9,10 @@ public class Metronome : MonoBehaviour
     public double nextTick = 0.0F;
     public bool ticked = false;
 
-    public bool turn = false;
-    
+    private int metronomePitchMaxCount = 4;
+    private int currentMetronomePitchCount;
+    private float currentMetronomePitch = 0.9f;
+
     public delegate void Ticked();
     public event Ticked OnMetronomeTick;
 
@@ -32,16 +34,17 @@ public class Metronome : MonoBehaviour
 
     private void OnTick()
     {
-        float pitch = 1;
-
-        if (turn)
+        if (currentMetronomePitchCount < metronomePitchMaxCount)
         {
-            pitch = 1.5f;
+            currentMetronomePitch += 0.2f;
+            currentMetronomePitchCount++;
+        } else
+        {
+            currentMetronomePitch = 1f;
+            currentMetronomePitchCount = 1;
         }
 
-        turn = !turn;
-
-        AudioManager.Instance.PlaySFX(metronomeTick, 0.2f, pitch);
+        AudioManager.Instance.PlaySFX(metronomeTick, 0.2f, currentMetronomePitch);
         OnMetronomeTick();
     }
 

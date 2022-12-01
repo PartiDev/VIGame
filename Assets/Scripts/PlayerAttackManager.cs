@@ -29,7 +29,7 @@ public class PlayerAttackManager : MonoBehaviour
 
         bool leftRight = player.playerNo == 1 ? true : false;
 
-        AudioManager.Instance.PlaySFXDirectional(player.parrySound, leftRight, 0.4f);
+        //AudioManager.Instance.PlaySFXDirectional(player.parrySound, leftRight, 0.4f);
 
         attack.ParryAttack(player.playerNo);
         //activePlayerAttacks.Add(attack);

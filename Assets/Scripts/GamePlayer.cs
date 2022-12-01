@@ -16,10 +16,10 @@ public class GamePlayer : MonoBehaviour
 
     [SerializeField] private int totalHealth = 100;
     private int currentHealth;
-    [SerializeField] private AudioClip hurtSound;
-    public AudioClip parrySound;
 
     [HideInInspector] public PlayerAttack incomingAttack;
+
+    [HideInInspector] public PlayerAttackMode currentAttackMode;
 
     private void Awake()
     {
@@ -33,7 +33,7 @@ public class GamePlayer : MonoBehaviour
         var volume = 0.3f;
 
         bool leftRight = playerNo == 1 ? true : false;
-        AudioManager.Instance.PlaySFXDirectional(hurtSound, leftRight, volume);
+        AudioManager.Instance.PlaySFXDirectional(incomingAttack.thisAttackMode.attackSound_Major, leftRight, volume);
         GameObject.Destroy(incomingAttack.gameObject);
 
         Debug.Log(currentHealth);

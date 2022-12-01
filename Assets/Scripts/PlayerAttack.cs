@@ -5,10 +5,7 @@ public class PlayerAttack : MonoBehaviour
 {
     [HideInInspector] public int playerNo;
     [HideInInspector] public bool currentPlayerSide;
-    private bool onFirstSide = true;
-    public bool moving = false;
-
-    private int currentAttackAmount;
+    public PlayerAttackMode thisAttackMode;
 
     [SerializeField] private AudioClip piano_AttackSound_Major;
     [SerializeField] private AudioClip guitar_AttackSound_Major;
@@ -29,7 +26,6 @@ public class PlayerAttack : MonoBehaviour
             leftRight = true;
         }
 
-        moving = true;
         AudioManager.Instance.PlaySFXDirectional(thisAudio, leftRight, 0.5f, 1);
     }
 
@@ -37,10 +33,5 @@ public class PlayerAttack : MonoBehaviour
     {
         playerNo = _playerNo;
         currentPlayerSide = !currentPlayerSide;
-        onFirstSide = true;
-        moving = true;
     }
 }
-
-public enum PlayerAttackMode { Piano, Flute, Guitar }
-public enum ChordType { Major, Minor }
