@@ -51,11 +51,11 @@ MonoBehaviour:
   Guitar_Mode: 273
   Piano_Mode: 276
   Flute_Mode: 275
-  Attack: 277
+  Attack: 256
   Parry: 305
   metronomeTickActive: 1
   movementOnCooldown: 0
-  totalHealth: 200
+  totalHealth: 100
   activeAttack: {fileID: 0}
   incomingAttack: {fileID: 0}
 --- !u!95 &217027844945805629

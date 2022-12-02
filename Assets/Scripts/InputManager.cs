@@ -34,6 +34,7 @@ namespace Assets.Scripts
             Player1.metronomeTickActive = false;
         }
 
+        //Could be generalised to prevent duplication
         public void FixedUpdate()
         {
             //Player 1 input types
@@ -57,7 +58,8 @@ namespace Assets.Scripts
                         currentPlayerAttack = attackModePrefabs[2];
                     }
 
-                    if (currentPlayerAttack != null){
+                    if (currentPlayerAttack != null)
+                    {
                         attackManager.PlayerAttack(Player1, Player2, currentPlayerAttack);
                         Player1.metronomeTickActive = false;
                     }
@@ -67,13 +69,31 @@ namespace Assets.Scripts
                 {
                     if (Player1.incomingAttack)
                     {
-                        attackManager.ParryAttack(Player1, Player1.incomingAttack);
+                        AttackType? attackType = null;
+                        if (Input.GetKey(Player1.Piano_Mode))
+                        {
+                            attackType = AttackType.Piano;
+                        }
+
+                        if (Input.GetKey(Player1.Guitar_Mode))
+                        {
+                            attackType = AttackType.Guitar;
+                        }
+
+                        if (Input.GetKey(Player1.Flute_Mode))
+                        {
+                            attackType = AttackType.Flute;
+                        }
+
+                        if (attackType != null)
+                        {
+                            attackManager.TryParryAttack(Player1, attackType.Value);
+                        }
                     }
                 }
             }
 
             //Player 2 input types
-
             if (!Player2.movementOnCooldown)
             {
                 if (Input.GetKey(Player2.Attack))
@@ -94,9 +114,37 @@ namespace Assets.Scripts
                         currentPlayerAttack = attackModePrefabs[2];
                     }
 
-                    if (currentPlayerAttack != null){
+                    if (currentPlayerAttack != null)
+                    {
                         attackManager.PlayerAttack(Player2, Player1, currentPlayerAttack);
                         Player2.metronomeTickActive = false;
+                    }
+                }
+
+                if (Input.GetKey(Player2.Parry))
+                {
+                    if (Player2.incomingAttack)
+                    {
+                        AttackType? attackType = null;
+                        if (Input.GetKey(Player2.Piano_Mode))
+                        {
+                            attackType = AttackType.Piano;
+                        }
+
+                        if (Input.GetKey(Player2.Guitar_Mode))
+                        {
+                            attackType = AttackType.Guitar;
+                        }
+
+                        if (Input.GetKey(Player2.Flute_Mode))
+                        {
+                            attackType = AttackType.Flute;
+                        }
+
+                        if (attackType != null)
+                        {
+                            attackManager.TryParryAttack(Player2, attackType.Value);
+                        }
                     }
                 }
             }

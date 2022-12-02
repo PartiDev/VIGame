@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 public class PlayerAttackManager : MonoBehaviour
 {
+    [SerializeField] private float parryWindow;
+    [SerializeField] private AudioClip[] parrySFX;
+
     public void PlayerAttack(GamePlayer attackingPlayer, GamePlayer opposingPlayer, PlayerAttack attackPrefab)
     {
         var newPlayerAttack = Instantiate(attackPrefab);
@@ -34,28 +37,55 @@ public class PlayerAttackManager : MonoBehaviour
 
     private IEnumerator WaitForAttackWindUp(PlayerAttack attack){
         yield return new WaitForSeconds(attack.thisAttackMode.leadUpTime);
+
+        attack.ActivateParryWindow();
+
+        yield return new WaitForSeconds(parryWindow);
+
         CheckForAttackInfluence(attack);
     }
 
     private void CheckForAttackInfluence(PlayerAttack attack)
     {
-        //Success
-        switch (attack.thisAttackMode.attackType)
+        if (!attack.isParried)
         {
-            case (AttackType.Piano):
-                attack.attackingPlayer.playerAnim.SetTrigger("Piano_Success");
-                break;
-            case (AttackType.Guitar):
-                attack.attackingPlayer.playerAnim.SetTrigger("Guitar_Success");
-                break;
-            case (AttackType.Flute):
-                attack.attackingPlayer.playerAnim.SetTrigger("Flute_Success");
-                break;
+            //Success
+            switch (attack.thisAttackMode.attackType)
+            {
+                case (AttackType.Piano):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Piano_Success");
+                    break;
+                case (AttackType.Guitar):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Guitar_Success");
+                    break;
+                case (AttackType.Flute):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Flute_Success");
+                    break;
+            }
+
+            attack.attackedPlayer.DamagePlayer();
+        }
+        else
+        {
+            switch (attack.thisAttackMode.attackType)
+            {
+                case (AttackType.Piano):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Piano_Fail");
+                    break;
+                case (AttackType.Guitar):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Guitar_Fail");
+                    break;
+                case (AttackType.Flute):
+                    attack.attackingPlayer.playerAnim.SetTrigger("Flute_Fail");
+                    break;
+            }
+
+            attack.attackingPlayer.DamagePlayerParry();
+
+            attack.attackingPlayer.movementOnCooldown = false;
+            attack.attackedPlayer.movementOnCooldown = false;
         }
 
-        attack.attackedPlayer.DamagePlayer();
-
-        attack.attackingPlayer.movementOnCooldown = false;
         DestroyAttack(attack);
     }
 
@@ -65,16 +95,27 @@ public class PlayerAttackManager : MonoBehaviour
         GameObject.Destroy(attack.gameObject);
     }
 
-    public void ParryAttack(GamePlayer player, PlayerAttack attack)
+    public void TryParryAttack(GamePlayer player, AttackType type)
     {
-        player.incomingAttack = null;
-        GameObject.Destroy(attack.gameObject);
-
+        player.movementOnCooldown = true;
         bool leftRight = player.playerNo == 1 ? true : false;
 
-        //AudioManager.Instance.PlaySFXDirectional(player.parrySound, leftRight, 0.4f);
+        switch (type)
+        {
+            case (AttackType.Piano):
+                player.playerAnim.SetTrigger("Piano_Parry");
+                AudioManager.Instance.PlaySFXDirectional(parrySFX[0], leftRight, 0.5f);
+                break;
+            case (AttackType.Guitar):
+                player.playerAnim.SetTrigger("Guitar_Parry");
+                AudioManager.Instance.PlaySFXDirectional(parrySFX[1], leftRight, 0.5f);
+                break;
+            case (AttackType.Flute):
+                player.playerAnim.SetTrigger("Flute_Parry");
+                AudioManager.Instance.PlaySFXDirectional(parrySFX[2], leftRight, 0.5f);
+                break;
+        }
 
-        attack.ParryAttack(player.playerNo);
-        //activePlayerAttacks.Add(attack);
+        player.incomingAttack.ParryAttack(type);
     }
 }

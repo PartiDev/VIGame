@@ -35,4 +35,16 @@ public class GamePlayer : MonoBehaviour
         this.totalHealth -= incomingAttack.attackAmount;
         GameObject.Destroy(incomingAttack.gameObject);
     }
+
+    public void DamagePlayerParry()
+    {
+        if (activeAttack == null) return;
+
+        var volume = 0.3f;
+
+        bool leftRight = playerNo == 1 ? true : false;
+        AudioManager.Instance.PlaySFXDirectional(activeAttack.thisAttackMode.hurtSound, leftRight, volume);
+        this.totalHealth -= activeAttack.attackAmount * 2;
+        GameObject.Destroy(activeAttack.gameObject);
+    }
 }
