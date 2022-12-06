@@ -11,7 +11,8 @@ public class GamePlayer : MonoBehaviour
     public KeyCode Parry;
 
     public bool metronomeTickActive = false;
-    public bool movementOnCooldown = false;
+    public bool canAttack = true;
+    public bool canParry = false;
 
     [SerializeField] private int totalHealth = 100;
     private int currentHealth;
@@ -19,11 +20,15 @@ public class GamePlayer : MonoBehaviour
     [HideInInspector] public PlayerAttack activeAttack;
     [HideInInspector] public PlayerAttack incomingAttack;
 
+    public delegate void OnDeath(GamePlayer player);
+    public event OnDeath OnPlayerDeath;
+
     private void Awake()
     {
         currentHealth = totalHealth;
     }
 
+    //Can be generalised
     public void DamagePlayer()
     {
         if (incomingAttack == null) return;
@@ -34,6 +39,11 @@ public class GamePlayer : MonoBehaviour
         AudioManager.Instance.PlaySFXDirectional(incomingAttack.thisAttackMode.hurtSound, leftRight, volume);
         this.totalHealth -= incomingAttack.attackAmount;
         GameObject.Destroy(incomingAttack.gameObject);
+
+        if (this.totalHealth <= 0)
+        {
+            OnPlayerDeath(this);
+        }
     }
 
     public void DamagePlayerParry()
@@ -46,5 +56,10 @@ public class GamePlayer : MonoBehaviour
         AudioManager.Instance.PlaySFXDirectional(activeAttack.thisAttackMode.hurtSound, leftRight, volume);
         this.totalHealth -= activeAttack.attackAmount * 2;
         GameObject.Destroy(activeAttack.gameObject);
+
+        if (this.totalHealth <= 0)
+        {
+            OnPlayerDeath(this);
+        }
     }
 }

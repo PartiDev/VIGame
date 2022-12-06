@@ -54,8 +54,9 @@ MonoBehaviour:
   Attack: 256
   Parry: 305
   metronomeTickActive: 1
-  movementOnCooldown: 0
-  totalHealth: 100
+  canAttack: 1
+  canParry: 0
+  totalHealth: 200
   activeAttack: {fileID: 0}
   incomingAttack: {fileID: 0}
 --- !u!95 &217027844945805629

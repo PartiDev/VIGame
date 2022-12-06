@@ -9,7 +9,8 @@ public class PlayerAttackManager : MonoBehaviour
     public void PlayerAttack(GamePlayer attackingPlayer, GamePlayer opposingPlayer, PlayerAttack attackPrefab)
     {
         var newPlayerAttack = Instantiate(attackPrefab);
-        attackingPlayer.movementOnCooldown = true;
+        attackingPlayer.canAttack = false;
+        opposingPlayer.canParry = true;
 
         switch (attackPrefab.thisAttackMode.attackType)
         {
@@ -81,15 +82,16 @@ public class PlayerAttackManager : MonoBehaviour
             }
 
             attack.attackingPlayer.DamagePlayerParry();
-
-            attack.attackingPlayer.movementOnCooldown = false;
-            attack.attackedPlayer.movementOnCooldown = false;
         }
+
+        attack.attackingPlayer.canAttack = true;
+        attack.attackedPlayer.canParry = false;
 
         DestroyAttack(attack);
     }
 
-    private void DestroyAttack(PlayerAttack attack){
+    private void DestroyAttack(PlayerAttack attack)
+    {
         attack.attackingPlayer.activeAttack = null;
         attack.attackedPlayer.incomingAttack = null;
         GameObject.Destroy(attack.gameObject);
@@ -97,7 +99,7 @@ public class PlayerAttackManager : MonoBehaviour
 
     public void TryParryAttack(GamePlayer player, AttackType type)
     {
-        player.movementOnCooldown = true;
+        player.canParry = false;
         bool leftRight = player.playerNo == 1 ? true : false;
 
         switch (type)
